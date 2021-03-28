@@ -62,7 +62,7 @@ namespace SteamGameCopy
                 lGames.Add(new Game() { name = getGameName(directoryName), gamePath = s, configPath = getConfigPath(directoryName) });
             }
             lGames.RemoveAll(x => String.IsNullOrEmpty(x.configPath));
-            lblStatus.Text = lGames.Count + " Spiele gefunden in "+steamPath;
+            lblStatus.Text = lGames.Count + " Games found in "+steamPath;
         }
         private string getConfigPath(string name)
         {
@@ -117,14 +117,14 @@ namespace SteamGameCopy
 
             if (Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)).Contains(zipPath))
             {
-                lblStatus.Text = "Archiv existiert bereits!";
+                lblStatus.Text = "Archive already existing!";
                 return;
             }
             #region print Layout
             int index = Array.IndexOf(simultaniousZippings, 0);
             if (index == -1)
             {
-                lblStatus.Text = "Bitte warte bis die Warteschlange abgearbeitet ist.";
+                lblStatus.Text = "Please wait till the queue is empty.";
                 return;
             }
             simultaniousZippings[index] = 1;
@@ -149,7 +149,7 @@ namespace SteamGameCopy
             this.Controls.Add(p);
             this.Controls.Add(l);
             #endregion
-            lblStatus.Text = "Erstelle Zip-Datei...";
+            lblStatus.Text = "Creating Zip-File...";
             CancellationTokenSource cts = new CancellationTokenSource();
             if (lCancel.ContainsKey(p.Name))
             {
@@ -160,9 +160,9 @@ namespace SteamGameCopy
                 lCancel.Add(p.Name, cts);
             }
             await Task.Factory.StartNew(() => createZipArchive(startPath, zipPath, p, l, _name, cts.Token));
-            lblStatus.Text = "acf-Datei hinzufügen...";
+            lblStatus.Text = "Adding acf-File...";
             await Task.Factory.StartNew(() => addConfigToZipArchive(zipPath, _name, cts.Token));
-            lblStatus.Text = lGames.Count + " Spiele gefunden in " + steamPath;
+            lblStatus.Text = lGames.Count + " Games found in " + steamPath;
             #region Recreate Layout
             if (index >= 5)
             {
@@ -184,7 +184,7 @@ namespace SteamGameCopy
              {
                  if(token.IsCancellationRequested)
                  {
-                     l.Text = "Breche ab...";
+                     l.Text = "Aborting...";
                      return;
                  }
                  progressBar.Maximum = 100;
@@ -246,7 +246,7 @@ namespace SteamGameCopy
             if (!simultaniousZippings.Contains(1))
             {
                 int size = 5;
-                if (Int32.TryParse(Microsoft.VisualBasic.Interaction.InputBox("Bitte geben sie die gewünschte Warteschlangengröße an", "Warteschlangengröße", ""), out size))
+                if (Int32.TryParse(Microsoft.VisualBasic.Interaction.InputBox("Please enter you desired Queuesize", "Queuesize", ""), out size))
                 {
                     simultaniousZippings = new int[size];
                 }
@@ -272,7 +272,7 @@ namespace SteamGameCopy
                     }
                     else
                     {
-                        MessageBox.Show("Bitte wählen Sie den Ordner steamapps in Ihrer Steam Bibliothek.");
+                        MessageBox.Show("Please select the folder steamapps in your Steam Library Folder.");
                     }
                 }
                 catch (Exception exc)
@@ -297,9 +297,9 @@ namespace SteamGameCopy
         private void importInLib()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Spiele zum Importieren auswählen";
+            openFileDialog.Title = "Select Game(s) to import";
             openFileDialog.Multiselect = true;
-            openFileDialog.Filter = "Zip Archiv (*.zip) | *.zip;";
+            openFileDialog.Filter = "Zip Archive (*.zip) | *.zip;";
             openFileDialog.ShowDialog();
             try
             {
@@ -314,11 +314,11 @@ namespace SteamGameCopy
                     string debug = Path.Combine(steamPath, Path.GetFileName(configFile));
                     File.Move(configFile, debug);
                 }
-                lblStatus.Text = openFileDialog.FileNames.Length + " Spiel(e) importiert!";
+                lblStatus.Text = openFileDialog.FileNames.Length + " Game(s) imported!";
             }
             catch(Exception exc)
             {
-                lblStatus.Text = "Fehler beim Importieren!";
+                lblStatus.Text = "Error while importing!";
             }
         }
     }

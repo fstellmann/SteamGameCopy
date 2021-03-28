@@ -61,7 +61,7 @@
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(123, 23);
             this.btnCopy.TabIndex = 1;
-            this.btnCopy.Text = "Export auf Desktop";
+            this.btnCopy.Text = "Export to Desktop";
             this.btnCopy.UseVisualStyleBackColor = true;
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
@@ -71,7 +71,7 @@
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(123, 23);
             this.btnShow.TabIndex = 1;
-            this.btnShow.Text = "Ordner anzeigen";
+            this.btnShow.Text = "Show Folder";
             this.btnShow.UseVisualStyleBackColor = true;
             this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
             // 
@@ -127,7 +127,7 @@
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(123, 23);
             this.btnImport.TabIndex = 4;
-            this.btnImport.Text = "Import in Bibliothek";
+            this.btnImport.Text = "Import in Library";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
@@ -136,9 +136,9 @@
             this.lblGame.AutoSize = true;
             this.lblGame.Location = new System.Drawing.Point(266, 30);
             this.lblGame.Name = "lblGame";
-            this.lblGame.Size = new System.Drawing.Size(123, 13);
+            this.lblGame.Size = new System.Drawing.Size(116, 13);
             this.lblGame.TabIndex = 5;
-            this.lblGame.Text = "<-- Bitte Spiel auswählen";
+            this.lblGame.Text = "<-- Please select Game";
             // 
             // fMain
             // 
